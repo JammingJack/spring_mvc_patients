@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 	layout:decorate="layout">
 <head>
 <meta charset="utf-8">
@@ -28,11 +29,11 @@
 				<td th:text="${p.dateNaissance}"></td>
 				<td th:text="${p.score}"></td>
 				<td th:text="${p.malade}"></td>
-				<td><a class="btn btn-danger"
+				<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger"
 					onclick="return confirm('Voulez vous supprimer ce patient?')"
 					th:href="@{deletePatient(id=${p.id},page=${currentPage},size=${size},keyword=${keyword})}">delete</a></td>
-				<td><a class="btn btn-secondary"
-					th:href="@{editPatient(id=${p.id})}">edit</a></td>
+				<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-secondary"
+					th:href="@{editPatient(id=${p.id})}">edit</a></td>	
 			</tr>
 		</table>
 		<div class="row">

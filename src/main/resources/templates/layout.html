@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.ord"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	>
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
@@ -15,7 +17,7 @@
 
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<!-- Brand -->
-			<a class="navbar-brand" href="#">Logo</a>
+			<a class="navbar-brand" th:href="@{index}">Logo</a>
 
 			<!-- Links -->
 			<ul class="navbar-nav">
@@ -27,18 +29,20 @@
 					class="nav-link dropdown-toggle" href="#" id="navbardrop"
 					data-toggle="dropdown"> Patient </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" th:href="@{formPatient}">Ajouter</a> <a
+						<a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{formPatient}">Ajouter</a> <a
 							class="dropdown-item" href="#">Chercher</a>
 					</div></li>
 			</ul>
-			<u class="navbar-nav mL-auto">
+			<ul class="navbar-nav ml-auto">
 				<!-- Dropdown -->
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbardrop"
-					data-toggle="dropdown"> [Username] </a>
+					data-toggle="dropdown">
+					<span sec:authorize="isAuthenticated()" sec:authentication="name"></span>
+					</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Log in</a> <a
-							class="dropdown-item" href="#">Log out</a><a
+						<a sec:authorize="isAnonymous()" class="dropdown-item" th:href="@{login}">Log in</a> 
+						<a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">Log out</a><a
 							class="dropdown-item" href="#">Profile</a>
 					</div></li>
 			</ul>
