@@ -23,7 +23,10 @@ public class PatientController {
 
 	@Autowired
 	private PatientRepository pr;
-
+	@GetMapping(path = "/")
+	public String welcomePage() {
+		return "layout";
+	}
 	@GetMapping(path = "/index")
 	public String listPatient(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "3") int size,
@@ -68,4 +71,5 @@ public class PatientController {
 		model.addAttribute("mode", "edit");
 		return "formPatient";
 	}
+	
 }
