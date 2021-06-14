@@ -1,3 +1,4 @@
+
 package com.example.demo.security;
 
 import javax.sql.DataSource;
@@ -25,14 +26,12 @@ public class securityConfig extends WebSecurityConfigurerAdapter{
 		PasswordEncoder  passwordEncoder = passwordEncoder();
 		
 		//IN MEMORY AUTH
-		/*
-		 * auth.inMemoryAuthentication().withUser("User1").password(passwordEncoder.
-		 * encode("1234")).roles("USER");
-		 * auth.inMemoryAuthentication().withUser("User2").password(passwordEncoder.
-		 * encode("1234")).roles("USER");
-		 * auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.
-		 * encode("1234")).roles("USER","ADMIN");
-		 */
+		  auth.inMemoryAuthentication().withUser("User1").password(passwordEncoder.
+		  encode("1234")).roles("USER");
+		  auth.inMemoryAuthentication().withUser("User2").password(passwordEncoder.
+		  encode("1234")).roles("USER");
+		  auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.
+		  encode("1234")).roles("USER","ADMIN");
 		// JDBC AUTH
 		/*
 		 * auth.jdbcAuthentication() .dataSource(dataSource)
@@ -40,11 +39,11 @@ public class securityConfig extends WebSecurityConfigurerAdapter{
 		 * )
 		 * .authoritiesByUsernameQuery("select username as principale, role as role from users_roles where username = ?"
 		 * ) .passwordEncoder(passwordEncoder) .rolePrefix("ROLE_");
-		 */
-		
+		*/
+
 		//USER DETAIL SERVICE AUTH
-		
-		auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder);
+
+		//auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder);
 	}
 	
 	@Override

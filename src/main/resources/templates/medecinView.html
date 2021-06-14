@@ -10,7 +10,7 @@
 <body>
 	<div layout:fragment="content" class="container">
 
-		<form method="get" th:action="index">
+		<form method="get" th:action="medecins">
 			<label>name</label> <input type="text" name="keyword"
 				th:value="${keyword}">
 			<button class="btn btn-success">Chercher</button>
@@ -19,13 +19,13 @@
 			<tr>
 				<th>id</th>
 				<th>nom</th>
-				<th>date</th>
+				<th>specialite</th>
 				<th>delete</th>
 			</tr>
 			<tr th:each="p:${list}">
 				<td th:text="${p.id}"></td>
 				<td th:text="${p.name}"></td>
-				<td th:text="${p.dateNaissance}"></td>
+				<td th:text="${p.specialite}"></td>
 				<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger"
 					onclick="return confirm('Voulez vous supprimer ce patient?')"
 					th:href="@{deletePatient(id=${p.id},page=${currentPage},size=${size},keyword=${keyword})}">delete</a></td>
