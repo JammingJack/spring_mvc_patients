@@ -3,6 +3,7 @@ package com.example.demo.web;
 import javax.validation.Valid;
 
 import com.example.demo.entities.Medecin;
+import com.example.demo.entities.RendezVous;
 import com.example.demo.repositories.MedecinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entities.Patient;
 import com.example.demo.repositories.PatientRepository;
+
+import java.util.List;
 
 @Controller()
 public class PatientController {
@@ -67,6 +70,16 @@ public class PatientController {
 		return "redirect:/index";
 	}
 
+	@GetMapping(path = "/priseRdv")
+	public String priseRDV(Model model, Long id) { // @requestparam not necessary because name of
+		// param is same with name of variable
+		Patient p = patientRepository.findById(id).get();
+		List<Medecin> medecinList = medecinRepository.findAll();
+		model.addAttribute("rdv", new RendezVous());
+		model.addAttribute("patient", p);
+		model.addAttribute("listMedecin", medecinList);
+		return "formRDV";
+	}
 	@GetMapping(path = "/editPatient")
 	public String editPatient(Model model, Long id) {
 		Patient p = patientRepository.findById(id).get();
